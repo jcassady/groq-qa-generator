@@ -1,0 +1,11 @@
+Generate <n> question and answer pairs based on the provided text.
+
+Make sure the question provides sufficient detail so the answer can be understood independently, without needing extra context.
+The answers should not directly quote the text but must convey the same meaning.
+Use diverse styles and formats for the questions.
+Provide the responses in plain text, with each question-answer pair on a separate line.
+Do not include question numbers.
+Do not return any additional explanations, such as:
+    "Here are the question and answer pairs based on the provided text:"
+
+Here is an example of a question and answer pair:
