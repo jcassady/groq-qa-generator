@@ -15,20 +15,22 @@
 </p>
 
 
-|  **Groq QA** is a Python library that automates the creation of question-answer pairs from text, designed to aid in fine-tuning large language models (LLMs). Built on the **Groq** platform, it leverages powerful models like **LLaMA 3** with 70 billion parameters, ideal for generating high-quality QA pairs. This tool streamlines the process of preparing custom datasets, helping improve LLM performance on specialized tasks with minimal manual effort. It’s particularly useful for fine-tuning models in research, education, and domain-specific applications. |
-|------------------------------------------------------------------------------------------|
+|  **Groq QA** is a Python library that automates the creation of question-answer pairs from text, designed to aid in fine-tuning large language models (LLMs). Built with **[Groq](https://groq.com/)**, it leverages powerful models like **[LLaMA 3](https://www.llama.com/)** with 70 billion parameters and 128K tokens, ideal for generating high-quality QA pairs. This tool streamlines the process of preparing custom datasets, helping improve LLM performance on specialized tasks with minimal manual effort. It’s particularly useful for fine-tuning models in research, education, and domain-specific applications. |
+|---------------------------------------------------------------------------------------------------------------|
+| <p align="center">**Note**: ***This project is not affiliated with or endorsed by Groq, Inc.***</p> |
+
 
 
 
 ## ✨ Features
 |   | ✨ Feature                         | 📄 Description                                                             |
 |----|-------------------------------------|-----------------------------------------------------------------------------|
-| ✅ | **CLI Support**                     | Use as a command-line tool.                                                 |
-| ✅ | **Python Library Support**          | Import directly in Python code.                                             |
+| ✅ | **CLI**                             | Use the CLI tool with the `groq-qa` command.                                                 |
+| ✅ | **Python Library**          | Import directly to your own Python code.                                             |
+| ✅ | **Advanced Models**                   | Supports large models like **LLaMA 3.1 70B** via the Groq API.               |
 | ✅ | **Automated QA Generation**         | Generate question-answer pairs from input text.                             |
 | ✅ | **Prompt Templates**                | Flexible question generation through prompt templates.                      |
-| ✅ | **Model Support**                   | Supports advanced models like LLaMA 3.1 70B via the Groq API.               |
-| ✅ | **Customizable Configurations**     | Configure via `config.json` or in Python code.                              |
+| ✅ | **Customizable Configurations**     | Configure via CLI, `config.json`, or directly in Python code.                              |
 
 ## 👨‍💻 About the Developer
 Hey there! I’m **[Jordan](https://jordan.cassady.me/)**, a Canadian network engineer with over a decade of experience, especially from my time in the fast-paced world of California startups. My focus has been on automating test systems aligned with company KPIs, making it easier for teams to make data-driven decisions.
@@ -43,7 +45,7 @@ Whether it’s tackling tough challenges, improving codebases, or working on inn
 - [👨‍💻 About the Developer](#-about-the-developer)
 - [🚀 Quick Start](#-quick-start)
 - [📦 Upgrading](#-upgrading)
-- [⚙️ Using `groq-qa`](#-using-groq-qa)
+- [⚙️ Using groq-qa](#-using-groq-qa)
   - [Setup the API Key](#setup-the-api-key)
   - [Setting the Environment Variable](#setting-the-environment-variable)
   - [Command-Line Interface (CLI)](#command-line-interface-cli)
@@ -96,7 +98,7 @@ You can update `groq_qa_generator` to the latest version by running:
 pip install --upgrade groq-qa-generator
 ```
 
-## ⚙️ Using `groq-qa`
+## ⚙️ Using groq-qa
 
 ### Setup the API Key
 
@@ -141,10 +143,10 @@ groq-qa --model llama3-70b-8192 --temperature 0.7 --json
 * `--json`: If this flag is included, the output will be saved in a JSON format. By default, the output is stored as a plain text file. The default is set to `False`.
 
 ## 🛠 Configuration
-When you run the groq-qa command for the first time, a user-specific configuration directory (`~/.groq_qa/`) is automatically created. This directory contains all the necessary configuration files and templates for customizing input, prompts, and output.
+When you run the `groq-qa` command for the first time, a user-specific configuration directory (`~/.groq_qa/`) is automatically created. This directory contains all the necessary configuration files and templates for customizing input, prompts, and output.
 
 ### Directory Structure
-```json
+```bash
 ~/.groq_qa/
 ├── config.json
 ├── data
@@ -176,28 +178,29 @@ When you run the groq-qa command for the first time, a user-specific configurati
 
 The `~/.groq_qa` directory contains essential files that can be customized to suit your specific needs. This directory includes the following components:
 
-- **config.json**: This is the main configuration file where you can set various parameters for the QA generation process. You can customize settings such as:
-  - **system_prompt**: Specify the path to your custom system prompt file that defines how the model should behave.
-  - **sample_question**: Provide the path to a custom sample question file that helps guide the generation of questions.
-  - **input_data**: Set the path to your own text file from which you want to generate question-answer pairs.
-  - **output_file**: Define the path where the generated QA pairs will be saved.
+- 📄 **config.json**: This is the main configuration file where you can set various parameters for the QA generation process. You can customize settings such as:
+  - 📝 **system_prompt**: Specify the path to your custom system prompt file that defines how the model should behave.
+  - ❓ **sample_question**: Provide the path to a custom sample question file that helps guide the generation of questions.
+  - 📖 **input_data**: Set the path to your own text file from which you want to generate question-answer pairs.
+  - 💾 **output_file**: Define the path where the generated QA pairs will be saved.
 
 Other configurable options include:
-- **model**: Select the model to be used for generating QA pairs (e.g., `llama3-70b-8192`).
-- **chunk_size**: Set the number of tokens for each text chunk (e.g., `512`).
-- **tokens_per_question**: Specify the number of tokens allocated for each question (e.g., `60`).
-- **temperature**: Control the randomness of the model's output (e.g., `0.1`).
-- **max_tokens**: Define the maximum number of tokens the model can generate in the response (e.g., `1024`).
+- 🤖 **model**: Select the model to be used for generating QA pairs (e.g., `llama3-70b-8192`).
+- 📏 **chunk_size**: Set the number of tokens for each text chunk (e.g., `512`).
+- 🪙 **tokens_per_question**: Specify the number of tokens allocated for each question (e.g., `60`).
+- 🔥 **temperature**: Control the randomness of the model's output (e.g., `0.1`).
+- 🪙 **max_tokens**: Define the maximum number of tokens the model can generate in the response (e.g., `1024`).
 
 By adjusting these files and settings, you can create a personalized environment for generating question-answer pairs that align with your specific use case.
 
+
 ## 🐇 Input Data 
 
-This project uses text data from *Alice's Adventures in Wonderland* by Lewis Carroll, sourced from [Project Gutenberg](https://www.gutenberg.org/). The full text is available in the `data/alices_adventures_in_wonderland.txt` file.
+This project uses text data from *Alice's Adventures in Wonderland* by Lewis Carroll, sourced from [Project Gutenberg](https://www.gutenberg.org/). The full text is available in the included `data/alices_adventures_in_wonderland.txt` file.
 
 ### Sample Input Data
 
-For demonstration purposes, a smaller sample of the full text is included in the `data/sample_input_data.txt` file. This file contains a portion of the main text, used to quickly test and generate question-answer pairs without processing the entire book.
+For demonstration purposes, a smaller sample of the full text is included in `data/sample_input_data.txt`. This file contains a portion of the main text, used to quickly test and generate question-answer pairs without processing the entire book.
 
 
 ## 🤖 Models
@@ -249,19 +252,16 @@ This allows you to integrate the functionality within any Python application eas
     - **Client Initialization**: A Groq API client is initialized to enable communication with the service, providing access to powerful models like **LLaMA 70B**.
 
 2. 📄 **Text Processing**:
-    - **Loading Prompts and Questions**: The library includes methods to load sample questions and system prompts from specified file paths. These prompts are essential for guiding the Groq API's response.
+    - **Loading Prompts and Questions**: The library includes methods to load sample questions and system prompts from specified file paths. These prompts are essential for guiding **LLaMA 70B**'s response.
     - **Generating Full Prompts**: The system prompt and sample question are combined into a complete prompt for the Groq API.
 
 3. 🤖 **QA Pair Generation**:
-    - The core process involves taking a list of text chunks and generating question-answer pairs using the Groq API. It:
+    - The core process involves taking a list of text chunks and generating question-answer pairs using the Groq API to prompt **LLaMA 70B** `Groq-qa-generator`:
         - Loads the system prompt and sample question.
-        - Iterates through each text chunk, creating a full prompt for the Groq API.
-        - Retrieves the completion from the Groq API.
+        - Iterates through each text chunk, creating a full prompt for **LLaMA 70B**.
+        - Retrieves the completion from the Groq API, and in turn the model.
         - Streams the completion response and converts it into question-answer pairs.
-        - Writes the generated QA pairs to the specified output file.
-
-This approach enables the generation of question-answer pairs, leveraging the Groq API while maintaining flexibility through configuration settings.
-
+        - Writes the generated QA pairs to the output file.
 
 ## 🧪 Running Tests
 
@@ -363,9 +363,3 @@ Yes, `groq_qa_generator` can be used as a Python library within your project. Si
 
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
-
-
-
- 
