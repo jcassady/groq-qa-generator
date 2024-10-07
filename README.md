@@ -1,5 +1,11 @@
 # Groq QA Generator
+![Contributors](https://img.shields.io/github/contributors/jcassady/groq-qa-generator?logo=githubsponsors&label=Contributors)
+![License](https://img.shields.io/github/license/jcassady/groq-qa-generator?label=License)
 
+![Issues](https://img.shields.io/github/issues/jcassady/groq-qa-generator?logo=github&label=Issues)
+![GitHub Release](https://img.shields.io/github/v/release/jcassady/groq-qa-generator?label=Release)
+![Last commit](https://img.shields.io/github/last-commit/jcassady/groq-qa-generator?logo=github&label=Last%20commit)
+![GitHub repo size](https://img.shields.io/github/repo-size/jcassady/groq-qa-generator?logo=github&label=Repo%20size)
 
 <p align="center">
   <img src="./assets/images/logo.png" alt="Groqqy" /><br>
