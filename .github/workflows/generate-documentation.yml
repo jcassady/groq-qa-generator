@@ -1,0 +1,60 @@
+name: Build and deploy documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**' # Only trigger the workflow if files in the docs directory change
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/**' # Only trigger the workflow if files in the docs directory change
+
+jobs:
+  build_docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          export PATH="$HOME/.local/bin:$PATH"
+
+      - name: Configure Poetry for virtual environment creation
+        run: |
+          poetry config virtualenvs.in-project true
+
+      - name: Install dependencies with Poetry
+        run: |
+          poetry install --with dev
+
+      - name: Create tmp _build and _static folders
+        run: mkdir -p docs/{_build,_static}
+
+      - name: Generate reStructuredText files with Sphinx-apidoc
+        run: |
+          cd docs
+          poetry run sphinx-apidoc -o . ../src/groq_qa_generator
+
+      - name: Build HTML pages with Sphinx
+        run: |
+          cd docs
+          poetry run sphinx-build -b html . _build/html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          
