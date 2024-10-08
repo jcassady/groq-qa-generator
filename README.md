@@ -1,6 +1,8 @@
-# Groq QA Generator
-![Contributors](https://img.shields.io/github/contributors/jcassady/groq-qa-generator?logo=githubsponsors&label=Contributors)
+# 🐱 Groq QA Generator
+[![Documentation](https://img.shields.io/badge/Documentation-available-brightgreen)](https://jcassady.github.io/groq-qa-generator)
 ![License](https://img.shields.io/github/license/jcassady/groq-qa-generator?label=License)
+![Contributors](https://img.shields.io/github/contributors/jcassady/groq-qa-generator?logo=githubsponsors&label=Contributors)
+![Python Versions](https://img.shields.io/pypi/pyversions/groq-qa-generator)
 
 ![Issues](https://img.shields.io/github/issues/jcassady/groq-qa-generator?logo=github&label=Issues)
 ![GitHub Release](https://img.shields.io/github/v/release/jcassady/groq-qa-generator?label=Release)
@@ -15,7 +17,7 @@
 </p>
 
 
-|  **Groq QA** is a Python library that automates the creation of question-answer pairs from text, designed to aid in fine-tuning large language models (LLMs). Built with **[Groq](https://groq.com/)**, it leverages powerful models like **[LLaMA 3](https://www.llama.com/)** with 70 billion parameters and 128K tokens, ideal for generating high-quality QA pairs. This tool streamlines the process of preparing custom datasets, helping improve LLM performance on specialized tasks with minimal manual effort. It’s particularly useful for fine-tuning models in research, education, and domain-specific applications. |
+|  <p align="left">**Groq QA** is a Python library that automates the creation of question-answer pairs from text, designed to aid in fine-tuning large language models (LLMs). Built with **[Groq](https://groq.com/)**, it leverages powerful models like **[LLaMA 3](https://www.llama.com/)** with 70 billion parameters and 128K tokens, ideal for generating high-quality QA pairs. This tool streamlines the process of preparing custom datasets, helping improve LLM performance on specialized tasks with minimal manual effort. It’s particularly useful for fine-tuning models in research, education, and domain-specific applications.</p> |
 |---------------------------------------------------------------------------------------------------------------|
 | <p align="center">**Note**: ***This project is not affiliated with or endorsed by Groq, Inc.***</p> |
 
@@ -45,6 +47,8 @@ Whether it’s tackling tough challenges, improving codebases, or working on inn
 - [👨‍💻 About the Developer](#-about-the-developer)
 - [🚀 Quick Start](#-quick-start)
 - [📦 Upgrading](#-upgrading)
+- [📖 Documentation](#-documentation)
+  - [Documentation Generation](#documentation-generation)
 - [⚙️ Using groq-qa](#-using-groq-qa)
   - [Setup the API Key](#setup-the-api-key)
   - [Setting the Environment Variable](#setting-the-environment-variable)
@@ -60,9 +64,6 @@ Whether it’s tackling tough challenges, improving codebases, or working on inn
 - [🐍 Python Library](#-python-library)
   - [Example](#example)
 - [🧠 Technical Overview](#-technical-overview)
-  - [API Interaction](#api-interaction)
-  - [Text Processing](#text-processing)
-  - [QA Pair Generation](#qa-pair-generation)
 - [🧪 Running Tests](#-running-tests)
 - [🤝 How to Contribute](#-how-to-contribute)
 - [❓ FAQ](#-faq)
@@ -97,6 +98,15 @@ You can update `groq_qa_generator` to the latest version by running:
 ```bash
 pip install --upgrade groq-qa-generator
 ```
+
+## 📖 Documentation
+You can access the full HTML documentation here:
+
+[Groq QA Generator Documentation](https://jcassady.github.io/groq-qa-generator/)
+
+### Documentation Generation
+The documentation is automatically generated using **Sphinx**, a powerful documentation generation tool for Python projects. Every change made to the documentation directory (`docs/`) triggers a GitHub Actions workflow that builds the HTML files and deploys them to **GitHub Pages**. This ensures that the documentation stays up-to-date with the latest project changes.
+
 
 ## ⚙️ Using groq-qa
 
