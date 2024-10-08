@@ -15,13 +15,6 @@ def initialize_logging():
     - Log level (e.g., INFO, WARNING)
     - Log message
     """
-
-    # Remove all existing handlers from the root logger to prevent any
-    # conflicts or duplications in logging configuration. This ensures that
-    # when we call logging.basicConfig, we have a clean slate for our logging setup.
-    for handler in logging.root.handlers[:]:
-        logging.root.removeHandler(handler)
-
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",

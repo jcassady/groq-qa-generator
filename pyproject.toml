@@ -1,14 +1,18 @@
 [tool.poetry]
 name = "groq-qa-generator"
-version = "1.0.0"
+version = "1.0.1"
 description = "Groq QA is a CLI tool and Python library that generates question-answer pairs from text to aid in fine-tuning large language models (LLMs)."
 authors = ["Jordan Cassady <jordan.cassady@gmail.com>"]
-license = "MIT"
 readme = "README.md"
+license = "MIT"
+include = [
+    "src/groq_qa_generator/data/*",           # Include all files in the data directory
+    "src/groq_qa_generator/data/prompts/*",   # Include all prompt files
+    "src/groq_qa_generator/config.json",       # Include the configuration file
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-logging = "^0.4.9.6"
 tiktoken = "^0.7.0"
 groq = "^0.11.0"
 python-dotenv = "^1.0.1"
@@ -26,10 +30,3 @@ sphinx-rtd-theme = "^3.0.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-# Files to include when packaging the project
-include = [
-    "src/groq_qa_generator/data/*",           # Include all files in the data directory
-    "src/groq_qa_generator/data/prompts/*",   # Include all prompt files
-    "src/groq_qa_generator/config.json",       # Include the configuration file
-]
