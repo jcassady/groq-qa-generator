@@ -92,14 +92,17 @@ def parse_arguments():
         raise SystemExit("Error: Invalid arguments provided.")
 
 
-def load_config(config_file="config.json"):
+def load_config(args, config_file="config.json"):
     """
     Load the configuration file, resolve file paths, and override settings with CLI arguments if provided.
 
     This function loads the configuration settings from a JSON file, resolves file paths based on the
-    user configuration directory, and applies any command-line argument overrides.
+    user configuration directory, and applies any command-line argument overrides provided by the user
+    via `args`.
 
     Args:
+        args (argparse.Namespace): Command-line arguments parsed by the `parse_arguments` function.
+                                   These can be used to override configuration file values.
         config_file (str): The name of the configuration file. Defaults to "config.json".
 
     Returns:
@@ -164,7 +167,7 @@ def load_config(config_file="config.json"):
         config["output_file"] = os.path.join(user_config_dir, config["output_file"])
         return config
 
-    def override_config_with_cli_args(config):
+    def override_config_with_cli_args(args, config):
         """
         Override configuration values with command-line arguments if provided.
 
@@ -184,11 +187,14 @@ def load_config(config_file="config.json"):
         if args.json:
             base_output_file = os.path.splitext(config["output_file"])[0]
             config["output_file"] = f"{base_output_file}.json"
+            config["json"] = args.json
+        else:
+            config["json"] = False
 
     try:
         config = load_json_config(config_file)
         config = resolve_config_paths(config)
-        override_config_with_cli_args(config)
+        override_config_with_cli_args(args, config)
         log_config(config, os.path.join(get_user_config_dir(), config_file))
         return config
     except FileNotFoundError as e:
@@ -344,6 +350,3 @@ def initialize_user_config():
         get_package_data_path(), os.path.join(user_config_dir, "data"), "Data"
     )
     copy_config_file_if_missing(user_config_dir)
-
-
-args = parse_arguments()

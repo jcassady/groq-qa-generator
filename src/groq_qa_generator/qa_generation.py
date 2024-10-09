@@ -7,7 +7,8 @@ from .groq_api import (
     stream_completion,
 )
 from .text_processing import write_response_to_file
-from .config import args
+
+# from .config import args
 
 
 def load_sample_question(file_path):
@@ -204,7 +205,9 @@ def generate_qa_pairs(text_chunks, groq_config):
             all_qa_pairs,
         )
 
-    write_qa_pairs_to_file(all_qa_pairs, groq_config["output_file"], args.json)
+    write_qa_pairs_to_file(
+        all_qa_pairs, groq_config["output_file"], groq_config["json"]
+    )
 
     logging.info(f"QA pairs written to file: {groq_config['output_file']}")
 
