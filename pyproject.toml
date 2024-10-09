@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "groq-qa-generator"
-version = "1.0.1"
+version = "1.1.0"
 description = "Groq QA is a CLI tool and Python library that generates question-answer pairs from text to aid in fine-tuning large language models (LLMs)."
 authors = ["Jordan Cassady <jordan.cassady@gmail.com>"]
 readme = "README.md"
