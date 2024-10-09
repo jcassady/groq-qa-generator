@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>groq_qa_generator package &mdash; groq-qa-generator  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            groq-qa-generator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">groq_qa_generator package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#groq-qa-generator-cli-module">groq_qa_generator.cli module</a></li>
+<li><a class="reference internal" href="#groq-qa-generator-config-module">groq_qa_generator.config module</a></li>
+<li><a class="reference internal" href="#module-groq_qa_generator.groq_api">groq_qa_generator.groq_api module</a><ul>
+<li><a class="reference internal" href="#groq_qa_generator.groq_api.get_api_key"><code class="docutils literal notranslate"><span class="pre">get_api_key()</span></code></a></li>
+<li><a class="reference internal" href="#groq_qa_generator.groq_api.get_groq_client"><code class="docutils literal notranslate"><span class="pre">get_groq_client()</span></code></a></li>
+<li><a class="reference internal" href="#groq_qa_generator.groq_api.get_groq_completion"><code class="docutils literal notranslate"><span class="pre">get_groq_completion()</span></code></a></li>
+<li><a class="reference internal" href="#groq_qa_generator.groq_api.stream_completion"><code class="docutils literal notranslate"><span class="pre">stream_completion()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#groq-qa-generator-groq-qa-module">groq_qa_generator.groq_qa module</a></li>
+<li><a class="reference internal" href="#module-groq_qa_generator.logging_setup">groq_qa_generator.logging_setup module</a><ul>
+<li><a class="reference internal" href="#groq_qa_generator.logging_setup.initialize_logging"><code class="docutils literal notranslate"><span class="pre">initialize_logging()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#groq-qa-generator-qa-generation-module">groq_qa_generator.qa_generation module</a></li>
+<li><a class="reference internal" href="#module-groq_qa_generator.text_processing">groq_qa_generator.text_processing module</a><ul>
+<li><a class="reference internal" href="#groq_qa_generator.text_processing.clean_text"><code class="docutils literal notranslate"><span class="pre">clean_text()</span></code></a></li>
+<li><a class="reference internal" href="#groq_qa_generator.text_processing.write_response_to_file"><code class="docutils literal notranslate"><span class="pre">write_response_to_file()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-groq_qa_generator.tokenizer">groq_qa_generator.tokenizer module</a><ul>
+<li><a class="reference internal" href="#groq_qa_generator.tokenizer.count_tokens"><code class="docutils literal notranslate"><span class="pre">count_tokens()</span></code></a></li>
+<li><a class="reference internal" href="#groq_qa_generator.tokenizer.generate_text_chunks"><code class="docutils literal notranslate"><span class="pre">generate_text_chunks()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">groq-qa-generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">groq_qa_generator package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/groq_qa_generator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="groq-qa-generator-package">
+<h1>groq_qa_generator package<a class="headerlink" href="#groq-qa-generator-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="groq-qa-generator-cli-module">
+<h2>groq_qa_generator.cli module<a class="headerlink" href="#groq-qa-generator-cli-module" title="Link to this heading"></a></h2>
+</section>
+<section id="groq-qa-generator-config-module">
+<h2>groq_qa_generator.config module<a class="headerlink" href="#groq-qa-generator-config-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-groq_qa_generator.groq_api">
+<span id="groq-qa-generator-groq-api-module"></span><h2>groq_qa_generator.groq_api module<a class="headerlink" href="#module-groq_qa_generator.groq_api" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.groq_api.get_api_key">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.groq_api.</span></span><span class="sig-name descname"><span class="pre">get_api_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/groq_api.html#get_api_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.groq_api.get_api_key" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the Groq API key from environment variables.</p>
+<p>This function loads environment variables from a .env file (if present)
+and returns the value of the GROQ_API_KEY variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Groq API key.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the GROQ_API_KEY variable is not set in the environment.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.groq_api.get_groq_client">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.groq_api.</span></span><span class="sig-name descname"><span class="pre">get_groq_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/groq_api.html#get_groq_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.groq_api.get_groq_client" title="Link to this definition"></a></dt>
+<dd><p>Initialize and return a Groq API client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>api_key</strong> (<em>str</em>) – The API key used to authenticate with the Groq service.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the Groq client for interacting with the Groq API.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Groq</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.groq_api.get_groq_completion">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.groq_api.</span></span><span class="sig-name descname"><span class="pre">get_groq_completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_prompt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_tokens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/groq_api.html#get_groq_completion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.groq_api.get_groq_completion" title="Link to this definition"></a></dt>
+<dd><p>Generate a completion from the Groq API using a system prompt and input text.</p>
+<p>This function sends a request to the Groq API to generate a completion based
+on the provided system prompt and chunked input text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Groq</em>) – The Groq API client.</p></li>
+<li><p><strong>system_prompt</strong> (<em>str</em>) – The prompt that defines the system’s behavior for the model.</p></li>
+<li><p><strong>chunk_text</strong> (<em>str</em>) – The input text chunk that is being processed by the model.</p></li>
+<li><p><strong>model</strong> (<em>str</em>) – The model identifier (e.g., “llama3-70b-8192”) for the completion.</p></li>
+<li><p><strong>temperature</strong> (<em>float</em>) – The temperature setting to control randomness in the output.</p></li>
+<li><p><strong>max_tokens</strong> (<em>int</em>) – The maximum number of tokens the model can generate in the response.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Groq API response object containing the completion results.
+None: If an error occurs during the API call, logs the error and returns None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>completion (object)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.groq_api.stream_completion">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.groq_api.</span></span><span class="sig-name descname"><span class="pre">stream_completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">completion</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/groq_api.html#stream_completion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.groq_api.stream_completion" title="Link to this definition"></a></dt>
+<dd><p>Stream the Groq API completion and return the accumulated response.</p>
+<p>This function streams the generated completion from the Groq API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>completion</strong> (<em>object</em>) – The streamed response from the Groq API.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The accumulated response from the streamed completion.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="groq-qa-generator-groq-qa-module">
+<h2>groq_qa_generator.groq_qa module<a class="headerlink" href="#groq-qa-generator-groq-qa-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-groq_qa_generator.logging_setup">
+<span id="groq-qa-generator-logging-setup-module"></span><h2>groq_qa_generator.logging_setup module<a class="headerlink" href="#module-groq_qa_generator.logging_setup" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.logging_setup.initialize_logging">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.logging_setup.</span></span><span class="sig-name descname"><span class="pre">initialize_logging</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/logging_setup.html#initialize_logging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.logging_setup.initialize_logging" title="Link to this definition"></a></dt>
+<dd><p>Configure the logging settings for the application.</p>
+<p>This function sets up the global logging configuration to display log messages
+at the <cite>INFO</cite> level or higher. The log format includes the timestamp, logger name,
+log level, and message. It also adjusts the log level for the ‘httpx’ library to
+display only warnings or higher to reduce unnecessary verbosity.</p>
+<p>Logging format:
+- Timestamp (in the format ‘YYYY-MM-DD HH:MM:SS’)
+- Logger name
+- Log level (e.g., INFO, WARNING)
+- Log message</p>
+</dd></dl>
+
+</section>
+<section id="groq-qa-generator-qa-generation-module">
+<h2>groq_qa_generator.qa_generation module<a class="headerlink" href="#groq-qa-generator-qa-generation-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-groq_qa_generator.text_processing">
+<span id="groq-qa-generator-text-processing-module"></span><h2>groq_qa_generator.text_processing module<a class="headerlink" href="#module-groq_qa_generator.text_processing" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.text_processing.clean_text">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.text_processing.</span></span><span class="sig-name descname"><span class="pre">clean_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/text_processing.html#clean_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.text_processing.clean_text" title="Link to this definition"></a></dt>
+<dd><p>Cleans the input text by removing excessive whitespace.</p>
+<p>This function replaces all sequences of whitespace characters (including tabs,
+newlines, and multiple spaces) with a single space. It also trims any leading
+or trailing whitespace from the text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The input text to be cleaned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The cleaned text with excessive whitespace removed and leading/trailing</dt><dd><p>whitespace trimmed.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.text_processing.write_response_to_file">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.text_processing.</span></span><span class="sig-name descname"><span class="pre">write_response_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/text_processing.html#write_response_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.text_processing.write_response_to_file" title="Link to this definition"></a></dt>
+<dd><p>Write the generated response to the specified output file.</p>
+<p>Depending on the <cite>json_format</cite> flag, the response is either written as JSON or plain text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> (<em>str</em>) – The response string to be written to the file.</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – The base name for the output file (without extension).</p></li>
+<li><p><strong>json_format</strong> (<em>bool</em>) – Flag to indicate whether to write as JSON. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Side Effects:</dt><dd><p>Writes the response to the specified output file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-groq_qa_generator.tokenizer">
+<span id="groq-qa-generator-tokenizer-module"></span><h2>groq_qa_generator.tokenizer module<a class="headerlink" href="#module-groq_qa_generator.tokenizer" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.tokenizer.count_tokens">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.tokenizer.</span></span><span class="sig-name descname"><span class="pre">count_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/tokenizer.html#count_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.tokenizer.count_tokens" title="Link to this definition"></a></dt>
+<dd><p>Counts the number of tokens in a given text using the specified tokenization model.</p>
+<p>This function uses the “cl100k_base” encoding model from <cite>tiktoken</cite> to encode the input
+text and counts the total number of tokens generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The input text for which tokens need to be counted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total number of tokens in the input text.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="groq_qa_generator.tokenizer.generate_text_chunks">
+<span class="sig-prename descclassname"><span class="pre">groq_qa_generator.tokenizer.</span></span><span class="sig-name descname"><span class="pre">generate_text_chunks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/groq_qa_generator/tokenizer.html#generate_text_chunks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#groq_qa_generator.tokenizer.generate_text_chunks" title="Link to this definition"></a></dt>
+<dd><p>Reads text from a file and splits it into chunks based on a token limit.</p>
+<p>This function reads the input text file line by line, and accumulates text into
+chunks such that the total number of tokens in each chunk does not exceed <cite>chunk_size</cite>.
+When the token limit is reached, the chunk is added to the list of chunks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – The path to the text file that needs to be chunked.</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – The maximum number of tokens allowed in each chunk.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list containing text chunks where each chunk respects the token limit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, groq-qa-generator.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "system_prompt": "system_prompt.txt",
+    "sample_question": "sample_question.txt",
+    "input_data": "sample_input_data.txt",
+    "output_file": "qa_output.txt",
+    "model": "llama3-70b-8192",
+    "chunk_size": 512,
+    "tokens_per_question": 60,
+    "temperature": 0.1,
+    "max_tokens": 1024
+}

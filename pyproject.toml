@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "groq-qa-generator"
+version = "1.0.1"
+description = "Groq QA is a CLI tool and Python library that generates question-answer pairs from text to aid in fine-tuning large language models (LLMs)."
+authors = ["Jordan Cassady <jordan.cassady@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+include = [
+    "src/groq_qa_generator/data/*",           # Include all files in the data directory
+    "src/groq_qa_generator/data/prompts/*",   # Include all prompt files
+    "src/groq_qa_generator/config.json",       # Include the configuration file
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+tiktoken = "^0.7.0"
+groq = "^0.11.0"
+python-dotenv = "^1.0.1"
+streamlit = "^1.39.0"
+
+[tool.poetry.scripts]
+# Entry point for the command-line interface (CLI) script
+groq-qa = "groq_qa_generator.cli:main"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+black = "^24.8.0"
+sphinx = "^8.0.2"
+sphinx-rtd-theme = "^3.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
