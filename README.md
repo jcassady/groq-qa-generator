@@ -10,6 +10,7 @@
 ![Last commit](https://img.shields.io/github/last-commit/jcassady/groq-qa-generator?logo=github&label=Last%20commit)
 ![GitHub repo size](https://img.shields.io/github/repo-size/jcassady/groq-qa-generator?logo=github&label=Repo%20size)
 ![Python Versions](https://img.shields.io/pypi/pyversions/groq-qa-generator)
+[![Downloads](https://static.pepy.tech/badge/groq-qa-generator)](https://pepy.tech/project/groq-qa-generator)
 
 <p align="center">
   <img src="./assets/images/logo.png" alt="Groqqy" /><br>
