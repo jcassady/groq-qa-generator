@@ -1,4 +1,5 @@
 # 🐱 Groq QA Generator
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a6129ef346ce412e953cc7949cee1599)](https://app.codacy.com/gh/jcassady/groq-qa-generator?utm_source=github.com&utm_medium=referral&utm_content=jcassady/groq-qa-generator&utm_campaign=Badge_Grade)
 [![Documentation](https://img.shields.io/badge/Documentation-available-brightgreen)](https://jcassady.github.io/groq-qa-generator)
 ![Pytests](https://github.com/jcassady/groq-qa-generator/actions/workflows/run-pytest.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jcassady/groq-qa-generator?label=License)
