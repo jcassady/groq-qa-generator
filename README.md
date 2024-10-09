@@ -1,13 +1,14 @@
 # 🐱 Groq QA Generator
 [![Documentation](https://img.shields.io/badge/Documentation-available-brightgreen)](https://jcassady.github.io/groq-qa-generator)
+![Pytests](https://github.com/jcassady/groq-qa-generator/actions/workflows/run-pytest.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jcassady/groq-qa-generator?label=License)
 ![Contributors](https://img.shields.io/github/contributors/jcassady/groq-qa-generator?logo=githubsponsors&label=Contributors)
-![Python Versions](https://img.shields.io/pypi/pyversions/groq-qa-generator)
 
 ![Issues](https://img.shields.io/github/issues/jcassady/groq-qa-generator?logo=github&label=Issues)
 ![GitHub Release](https://img.shields.io/github/v/release/jcassady/groq-qa-generator?label=Release)
 ![Last commit](https://img.shields.io/github/last-commit/jcassady/groq-qa-generator?logo=github&label=Last%20commit)
 ![GitHub repo size](https://img.shields.io/github/repo-size/jcassady/groq-qa-generator?logo=github&label=Repo%20size)
+![Python Versions](https://img.shields.io/pypi/pyversions/groq-qa-generator)
 
 <p align="center">
   <img src="./assets/images/logo.png" alt="Groqqy" /><br>
@@ -102,10 +103,10 @@ pip install --upgrade groq-qa-generator
 ## 📖 Documentation
 You can access the full HTML documentation here:
 
-[Groq QA Generator Documentation](https://jcassady.github.io/groq-qa-generator/)
+👉 [**Groq QA Generator Documentation**](https://jcassady.github.io/groq-qa-generator/) 👈
 
 ### Documentation Generation
-The documentation is automatically generated using **Sphinx**, a powerful documentation generation tool for Python projects. Every change made to the documentation directory (`docs/`) triggers a GitHub Actions workflow that builds the HTML files and deploys them to **GitHub Pages**. This ensures that the documentation stays up-to-date with the latest project changes.
+The documentation is automatically generated using **Sphinx**, a documentation generation tool for Python projects. Every change made to the documentation directory (`docs/`) triggers a GitHub Actions workflow that builds the HTML files and deploys them to **GitHub Pages**. This ensures that the documentation stays up-to-date with the latest project changes.
 
 
 ## ⚙️ Using groq-qa
@@ -144,7 +145,7 @@ groq-qa
 groq-qa --json 
 
  # Run with model, temperature, and json overrides:
-groq-qa --model llama3-70b-8192 --temperature 0.7 --json
+groq-qa --model llama3-70b-8192 --temperature 0.9 --json
 ```
 
 #### CLI Options:
@@ -235,23 +236,25 @@ In addition to CLI usage, the `groq_qa_generator` can be used directly in your P
 
 from groq_qa_generator import groq_qa
 
-# Define a custom configuration
-custom_config = {
-    "system_prompt": "~/custom_path/custom_system_prompt.txt",
-    "sample_question": "~/custom_path/custom_sample_question.txt",
-    "input_data": "~/custom_path/custom_input_data.txt",
-    "output_file": "~/custom_path/qa_output.txt",
-    "model": "llama3-70b-8192",
-    "chunk_size": 512,
-    "tokens_per_question": 60,
-    "temperature": 0.1,
-    "max_tokens": 1024
-}
+def main():
+  # Define a custom configuration
+    custom_config = {
+        "system_prompt": "custom_system_prompt.txt",
+        "sample_question": "custom_sample_question.txt",
+        "input_data": "custom_input_data.txt",
+        "output_file": "qa_output.txt",
+        "model": "llama3-70b-8192",
+        "chunk_size": 512,
+        "tokens_per_question": 60,
+        "temperature": 0.1,
+        "max_tokens": 1024
+    }
 
-if __name__ == "__main__":
     qa_pairs = groq_qa.generate(custom_config)
     print(qa_pairs)
 
+if __name__ == "__main__":
+    main()
 ```
 This allows you to integrate the functionality within any Python application easily.
 
@@ -326,33 +329,23 @@ The tests cover various components, including:
    ```
 
 ## ❓ FAQ
-
-### 📝 How do I use my own input data?
-You can customize the input data by editing the `input_data` field in your `config.json` file or by passing a custom input file via the CLI. To use a custom file in the configuration:
-
-```json
-{
-    "input_data": "~/custom_path/my_input_data.txt"
-}
-```
-
 ### 📁 Where can I find the generated QA pairs?
 The generated QA pairs are saved to the `output_file` defined in your `config.json` file. By default, it saves the output in `qa_output.txt`, located in your home directory’s `.groq_qa` folder (`~/.groq_qa/qa_output.txt`).
 
-To change the output file name, edit the output_file field in your config.json file:
+To change the output file name, edit the output_file field in your `config.json` file:
 
 ```bash
 {
-    "output_file": "~/custom_output_path/qa_custom_output.txt"
+    "output_file": "qa_custom_output.txt"
 }
 ```
 
 
 ### 🛠 Can I modify the sample question or system prompt templates?
-Yes, both the sample question and the system prompt can be modified. These templates are located in the prompts directory inside the `~/.groq_qa/` folder:
+Yes, both the system prompt and the sample question can be modified. These templates are located in the prompts directory inside the `~/.groq_qa/` folder:
 
-* `sample_question.txt`: This file defines how sample questions should be structured.
-* `system_prompt.txt`: This file defines how the system should behave and guide the generation process.
+* `system_prompt.txt`: Defines how the model should behave and guide the generation process.
+* `sample_question.txt`: Defines how sample questions should be structured.
 Feel free to edit these templates to suit your needs.
 
 ### 🔄 How do I override default configuration settings?
@@ -361,7 +354,7 @@ You can override the default configuration settings in two ways:
 2. Pass command-line arguments to override specific settings, for example:
 
 ```bash
-groq-qa --model llama3-70b-8192 --temperature 0.5
+groq-qa --model llama3-70b-8192 --temperature 0.9
 ```
 
 ### 🎛 How can I increase the randomness of the output?
