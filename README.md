@@ -144,13 +144,15 @@ groq-qa
 # Output results in JSON format:
 groq-qa --json 
 
- # Run with model, temperature, and json overrides:
-groq-qa --model llama3-70b-8192 --temperature 0.9 --json
+ # Run with model, temperature, questions, and json overrides:
+groq-qa --model llama3-70b-8192 --temperature 0.9 --questions 1 --json
+
 ```
 
 #### CLI Options:
 * `--model`: The default model to be used for generating QA pairs is defined in `config.json`. The default is set to `llama3-70b-8192`.
-* `--temperature`: Controls the randomness of the model's output. Lower values like `0.1` will result in more deterministic and focused outputs, while higher values will make the output more random. The default is set to `0.1`.
+* `--temperature`: Controls the randomness of the model's output. Lower values will result in more deterministic and focused outputs, while higher values will make the output more random. The default is set to `0.1`.
+* `--questions`: Allows you to specify the exact number of question-answer pairs to generate per chunk of text. For example, using `1` will force the system to generate 1 QA pair for each chunk, regardless of chunk size or token limits.
 * `--json`: If this flag is included, the output will be saved in a JSON format. By default, the output is stored as a plain text file. The default is set to `False`.
 
 ## 🛠 Configuration

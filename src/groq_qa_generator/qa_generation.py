@@ -24,33 +24,51 @@ def load_sample_question(file_path):
         return f.read().strip()
 
 
-def load_system_prompt(file_path, chunk_size, tokens_per_question):
-    """Load and prepare the system prompt, adjusting it based on chunk size and tokens per question.
+def load_system_prompt(file_path, chunk_size, tokens_per_question, questions=None):
+    """
+    Load and prepare the system prompt, adjusting it based on chunk size, tokens per question, or a user-specified number of questions.
 
-    This function reads the system prompt from a file and calculates how many questions should
-    be generated per chunk based on the chunk size and tokens per question. It then replaces
-    a placeholder ("<n>") in the system prompt with the calculated number of questions.
+    This function reads the system prompt from a file and determines how many questions should
+    be generated. If the user provides a specific number of questions via the `questions` argument,
+    that number is used. Otherwise, the number of questions is calculated based on the chunk size
+    and tokens per question. The calculated or provided number of questions then replaces a placeholder
+    ("{questions_per_chunk}") in the system prompt.
 
     Args:
         file_path (str): The path to the system prompt file.
         chunk_size (int): The number of tokens per chunk (default: 512).
         tokens_per_question (int): The number of tokens allocated for each question (default: 60).
+        questions (int, optional): The number of questions specified by the user, typically passed
+                                   through the CLI `--questions` argument. If provided, this overrides
+                                   the calculation based on chunk size and tokens per question.
 
     Returns:
         str: The formatted system prompt with the number of questions inserted.
 
     Notes:
-        - With a default chunk_size of 512 and tokens_per_question of 60, this function
-          will generate 8 questions per chunk (512 / 60 ≈ 8).
+        - With a default `chunk_size` of 512 and `tokens_per_question` of 60, this function
+          will generate approximately 8 questions per chunk (512 / 60 ≈ 8).
+        - If the `--questions` CLI argument is provided, its value is used directly instead
+          of calculating the number of questions from the chunk size and tokens per question.
+        - If `questions` is not provided, the number of questions is dynamically calculated as:
+          questions_per_chunk = chunk_size // tokens_per_question.
     """
-    questions_per_chunk = int(chunk_size / tokens_per_question)
+
+    # Use the provided number of questions, or calculate based on chunk_size and tokens_per_question
+    if questions is not None:
+        questions_per_chunk = questions
+    else:
+        questions_per_chunk = int(chunk_size / tokens_per_question)
 
     with open(file_path, "r", encoding="utf-8") as f:
         system_prompt = f.read().strip()
 
-    system_prompt = system_prompt.replace("<n>", str(questions_per_chunk))
+    # Replace the placeholder for questions with the calculated or provided value
+    modified_prompt = system_prompt.replace(
+        "<n>", str(questions_per_chunk)
+    )
 
-    return system_prompt
+    return modified_prompt
 
 
 def create_groq_prompt(system_prompt, sample_question):
@@ -87,6 +105,7 @@ def generate_qa_pairs(text_chunks, groq_config):
             - model (str): Model name or identifier for QA generation.
             - temperature (float): Temperature setting to control randomness in the model's output.
             - max_tokens (int): Maximum number of tokens in the response.
+            - questions (int, optional): The number of questions to generate, overriding chunk size calculation.
             - output_file (str): Path to the output file where results will be written.
 
     Returns:
@@ -186,6 +205,7 @@ def generate_qa_pairs(text_chunks, groq_config):
         groq_config["system_prompt"],
         groq_config["chunk_size"],
         groq_config["tokens_per_question"],
+        groq_config["questions"],
     )
 
     sample_question = load_sample_question(groq_config["sample_question"])

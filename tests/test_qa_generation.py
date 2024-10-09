@@ -5,6 +5,7 @@ from groq_qa_generator.qa_generation import (
     load_sample_question,
     load_system_prompt,
     create_groq_prompt,
+    generate_qa_pairs
 )
 
 
@@ -26,11 +27,13 @@ def test_load_sample_question():
 
 
 def test_load_system_prompt():
-    """Test loading and preparing the system prompt.
+    """Test loading and preparing the system prompt with and without --questions.
 
     This test verifies that the load_system_prompt function reads the system
     prompt from a file and replaces the "<n>" placeholder with the correct
-    number of questions based on the provided chunk size and tokens per question.
+    number of questions based on either:
+    1. The provided chunk size and tokens per question, or
+    2. The explicit --questions argument.
 
     It ensures that the returned prompt contains the expected format and
     structure after processing.
@@ -38,13 +41,26 @@ def test_load_system_prompt():
     system_prompt_content = "Generate <n> questions based on the text."
     chunk_size = 512
     tokens_per_question = 60
-    expected_prompt = "Generate 8 questions based on the text."
 
+    # Case 1: No --questions argument, default calculation (chunk_size / tokens_per_question)
+    expected_prompt_default = "Generate 8 questions based on the text."
     with patch("builtins.open", mock_open(read_data=system_prompt_content)):
-        result = load_system_prompt(
+        result_default = load_system_prompt(
             "system_prompt.txt", chunk_size, tokens_per_question
         )
-    assert result == expected_prompt
+    assert result_default == expected_prompt_default
+
+    # Case 2: Explicit --questions argument (e.g., --questions 5)
+    questions_arg = 5
+    expected_prompt_with_questions = "Generate 5 questions based on the text."
+    with patch("builtins.open", mock_open(read_data=system_prompt_content)):
+        result_with_questions = load_system_prompt(
+            "system_prompt.txt",
+            chunk_size,
+            tokens_per_question,
+            questions=questions_arg,
+        )
+    assert result_with_questions == expected_prompt_with_questions
 
 
 def test_create_groq_prompt():
@@ -62,3 +78,4 @@ def test_create_groq_prompt():
 
     result = create_groq_prompt(system_prompt, sample_question)
     assert result == expected_full_prompt
+
