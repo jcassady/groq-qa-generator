@@ -41,6 +41,10 @@ def parse_arguments():
             if not (0.0 <= temperature <= 1.0):
                 raise ValueError("Temperature must be between 0.0 and 1.0.")
 
+        def validate_split_ratio(split_ratio):
+            if not 0.0 < args.split < 1.0:
+                raise ValueError("--split must be a float between 0.0 and 1.0")
+
         # Create the argument parser
         parser = argparse.ArgumentParser(
             description="Generate QA pairs from text input."
@@ -77,11 +81,23 @@ def parse_arguments():
             help="Number of QA pairs per text chunk to generate.",
         )
 
+        parser.add_argument(
+            "--split",
+            type=float,
+            default=0.8,
+            help=(
+                "Fraction of the dataset to be used for training. "
+                "The value should be between 0.0 and 1.0, representing the proportion of data allocated to training. "
+                "For example, --split 0.8 will allocate 80% of the data for training and 20% for testing. "
+            ),
+        )
+
         # Parse the arguments
         args = parser.parse_args()
 
-        # Validate the temperature argument
+        # Validate the temperature and split argument
         validate_temperature(args.temperature)
+        validate_split_ratio(args.split)
 
         return args
 
@@ -189,7 +205,11 @@ def load_config(args, config_file="config.json"):
         """
         # Set model and temperature if provided, otherwise keep existing config
         config["model"] = args.model or config.get("model", "default_model")
-        config["temperature"] = args.temperature if args.temperature is not None else config.get("temperature", 0.1)
+        config["temperature"] = (
+            args.temperature
+            if args.temperature is not None
+            else config.get("temperature", 0.1)
+        )
 
         # Set questions with a default value of None if not provided
         config["questions"] = args.questions or None
@@ -199,7 +219,6 @@ def load_config(args, config_file="config.json"):
             base_output_file = os.path.splitext(config["output_file"])[0]
             config["output_file"] = f"{base_output_file}.json"
         config["json"] = args.json or False
-
 
     try:
         config = load_json_config(config_file)

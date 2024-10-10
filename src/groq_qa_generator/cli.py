@@ -12,7 +12,7 @@ def main():
     """Main entry point for the QA pair generation process.
 
     This function orchestrates the entire process of parsing command-line arguments,
-    setting up logging, initializing the user configuration directory, loading the 
+    setting up logging, initializing the user configuration directory, loading the
     configuration, reading and chunking the input text, and generating question-answer pairs.
     """
 
@@ -31,6 +31,7 @@ def main():
     qa_pairs = generate_qa_pairs(
         text_chunks, groq_config
     )  # Generate question-answer pairs from text chunks.
+    print(f"---------\n\n{qa_pairs}")
 
 
 if __name__ == "__main__":

@@ -80,3 +80,9 @@ def generate(custom_config=None):
     qa_pairs = generate_qa_pairs(text_chunks, groq_config)
 
     return qa_pairs
+
+
+if __name__ == "__main__":
+    raise RuntimeError(
+        "Do not run groq_qa.py directly. Please use cli.py for testing and development purposes."
+    )
