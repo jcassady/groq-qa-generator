@@ -295,7 +295,11 @@ To run the project's tests, you can use Poetry and pytest. Follow these steps:
    cd groq-qa-generator
    poetry install
    ```
-3. 🏃 **Run Tests**: Use pytest to run the tests.
+3.  ⚙️ **Confirm the Environment**: Verify that the virtual environment has been correctly set up and activated.
+   ```bash
+   poetry shell
+   ```
+4. 🏃 **Run Tests**: Use pytest to run the tests.
    ```bash
    poetry run pytest
    ```
