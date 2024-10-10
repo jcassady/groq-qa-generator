@@ -1,15 +1,17 @@
 # 🐱 Groq QA Generator
 [![Documentation](https://img.shields.io/badge/Documentation-available-brightgreen)](https://jcassady.github.io/groq-qa-generator)
+![Issues](https://img.shields.io/github/issues/jcassady/groq-qa-generator?logo=github&label=Issues)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a6129ef346ce412e953cc7949cee1599)](https://app.codacy.com/gh/jcassady/groq-qa-generator?utm_source=github.com&utm_medium=referral&utm_content=jcassady/groq-qa-generator&utm_campaign=Badge_Grade)
 ![Pytests](https://github.com/jcassady/groq-qa-generator/actions/workflows/run-pytest.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jcassady/groq-qa-generator?label=License)
 ![Contributors](https://img.shields.io/github/contributors/jcassady/groq-qa-generator?logo=githubsponsors&label=Contributors)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-![Issues](https://img.shields.io/github/issues/jcassady/groq-qa-generator?logo=github&label=Issues)
-![GitHub Release](https://img.shields.io/github/v/release/jcassady/groq-qa-generator?label=Release)
-![Last commit](https://img.shields.io/github/last-commit/jcassady/groq-qa-generator?logo=github&label=Last%20commit)
+![GitHub release](https://img.shields.io/github/v/release/jcassady/groq-qa-generator?label=Release)
+![Last commit](https://img.shields.io/github/last-commit/jcassady/groq-qa-generator?logo=github&label=Last%20commit&color=blue)
+![Total commits](https://img.shields.io/github/commit-activity/m/jcassady/groq-qa-generator)
 ![GitHub repo size](https://img.shields.io/github/repo-size/jcassady/groq-qa-generator?logo=github&label=Repo%20size)
-![Python Versions](https://img.shields.io/pypi/pyversions/groq-qa-generator)
+![Python versions](https://img.shields.io/pypi/pyversions/groq-qa-generator)
 [![Downloads](https://static.pepy.tech/badge/groq-qa-generator)](https://pepy.tech/project/groq-qa-generator)
 
 <p align="center">
