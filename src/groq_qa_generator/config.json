@@ -3,6 +3,8 @@
     "sample_question": "sample_question.txt",
     "input_data": "sample_input_data.txt",
     "output_file": "qa_output.txt",
+    "split_ratio": 0.8,
+    "huggingface_repo": "username/dataset",
     "model": "llama3-70b-8192",
     "chunk_size": 512,
     "tokens_per_question": 60,

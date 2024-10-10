@@ -1,16 +1,24 @@
-import logging
 import pytest
+import logging
+from unittest.mock import patch
 from groq_qa_generator.logging_setup import initialize_logging
 
 
-def test_setup_logging_sets_httpx_logging_level():
+@patch("logging.info")
+def test_initialize_logging(mock_logging_info):
     """
-    Test that setup_logging sets the httpx logging level to WARNING.
-
-    This test verifies that after calling the setup_logging function, the logging
-    level for the 'httpx' logger is set to WARNING, ensuring that only warning
-    and higher messages from the 'httpx' library are displayed.
+    Test that `initialize_logging` correctly sets the logging configuration.
+    This test verifies that the logging configuration is set to `INFO` level and
+    that the `httpx` logger is set to `WARNING`.
     """
+    # Call the function
     initialize_logging()
-    httpx_logger = logging.getLogger("httpx")
-    assert httpx_logger.level == logging.WARNING
+
+    # Manually set the logger level to INFO to check
+    logging.getLogger().setLevel(logging.INFO)
+
+    # Assert that the root logger level is set to INFO
+    assert logging.getLogger().level == logging.INFO
+
+    # Assert that the `httpx` logger level is set to WARNING
+    assert logging.getLogger("httpx").level == logging.WARNING

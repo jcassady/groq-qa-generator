@@ -22,9 +22,10 @@
 </p>
 
 
-|  <p align="left">**Groq QA** is a Python library that automates the creation of question-answer pairs from text, designed to aid in fine-tuning large language models (LLMs). Built with **[Groq](https://groq.com/)**, it leverages powerful models like **[LLaMA 3](https://www.llama.com/)** with 70 billion parameters and 128K tokens, ideal for generating high-quality QA pairs. This tool streamlines the process of preparing custom datasets, helping improve LLM performance on specialized tasks with minimal manual effort. It’s particularly useful for fine-tuning models in research, education, and domain-specific applications.</p> |
+|  <p align="left">**Groq QA** is a Python library that automates creating question-answer pairs from text to fine-tune large language models (LLMs). Powered by **[Groq](https://groq.com/)** and extended with **[Hugging Face](https://huggingface.co/)**, it uses models like **[LLaMA 3](https://www.llama.com/)** (70B parameters, 128K tokens) to generate high-quality QA pairs. The tool streamlines dataset preparation and enables easy fine-tuning in research, education, and domain-specific applications.</p> |
 |---------------------------------------------------------------------------------------------------------------|
 | <p align="center">**Note**: ***This project is not affiliated with or endorsed by Groq, Inc.***</p> |
+
 
 
 
@@ -33,18 +34,21 @@
 |   | ✨ Feature                         | 📄 Description                                                             |
 |----|-------------------------------------|-----------------------------------------------------------------------------|
 | ✅ | **CLI**                             | Use the CLI tool with the `groq-qa` command.                                                 |
-| ✅ | **Python Library**          | Import directly to your own Python code.                                             |
+| ✅ | **Python Library**          | Import directly to your own Python project and extend your code.                                             |
 | ✅ | **Advanced Models**                   | Supports large models like **LLaMA 3.1 70B** via the Groq API.               |
 | ✅ | **Automated QA Generation**         | Generate question-answer pairs from input text.                             |
+| ✅ | **Hugging Face Datasets**    | Convert QA pairs to Hugging Face datasets, then export or upload datasets to Hugging Face. |
+| ✅ | **Custom Split Ratios**              | Define custom train/test split ratios when generating QA pairs. |
 | ✅ | **Prompt Templates**                | Flexible question generation through prompt templates.                      |
 | ✅ | **Customizable Configurations**     | Configure via CLI, `config.json`, or directly in Python code.                              |
 
 ## 👨‍💻 About the Developer
-Hey there! I’m **[Jordan](https://jordan.cassady.me/)**, a Canadian network engineer with over a decade of experience, especially from my time in the fast-paced world of California startups. My focus has been on automating test systems aligned with company KPIs, making it easier for teams to make data-driven decisions.
+Hey there! I’m **[Jordan](https://jordan.cassady.me/)**, a Canadian network engineer with over a decade of experience, especially from my time in the fast-paced world of California startups. ✌️ My focus has been on automating test systems aligned with company KPIs, making it easier for teams to make data-driven decisions.
 
-Whether it’s tackling tough challenges, improving codebases, or working on innovative ideas, I’m always up for the task. Let’s connect and make things happen! ✌️
-
+Whether it’s tackling tough challenges, improving codebases, or working on innovative ideas, I’m always up for the task. Let’s **[connect on LinkedIn](https://www.linkedin.com/in/jordan-cassady)** and make things happen! 🤝
+  
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F2F814ELQM)
+
 
 ## 📄 Table of Contents
 - [🐱 Groq QA Generator](#-groq-qa-generator)
@@ -55,10 +59,14 @@ Whether it’s tackling tough challenges, improving codebases, or working on inn
 - [📖 Documentation](#-documentation)
   - [Documentation Generation](#documentation-generation)
 - [⚙️ Using groq-qa](#-using-groq-qa)
-  - [Setup the API Key](#setup-the-api-key)
-  - [Setting the Environment Variable](#setting-the-environment-variable)
+  - [Setup the API Keys](#setup-the-api-keys)
+  - [Setting the Environment Variables](#setting-the-environment-variables)
+    - [Option 1: Using a `.env` File](#option-1-using-a-env-file-recommended)
+    - [Option 2: Exporting Directly in the Terminal](#option-2-exporting-directly-in-the-terminal)
   - [Command-Line Interface (CLI)](#command-line-interface-cli)
     - [CLI Options](#cli-options)
+- [🤗 Hugging Face Datasets](#-hugging-face-datasets)
+  - [Export and Upload](#export-and-upload)
 - [🛠 Configuration](#-configuration)
   - [Directory Structure](#directory-structure)
   - [Default config.json](#default-configjson)
@@ -66,14 +74,13 @@ Whether it’s tackling tough challenges, improving codebases, or working on inn
 - [🐇 Input Data](#-input-data)
   - [Sample Input Data](#sample-input-data)
 - [🤖 Models](#-models)
-- [🐍 Python Library](#-python-library)
   - [Example](#example)
 - [🧠 Technical Overview](#-technical-overview)
-- [🧪 Running Tests](#-running-tests)
+- [🧪 Testing Overview](#-testing-overview)
+  - [🥼 Running Tests](#-running-tests)
 - [🤝 How to Contribute](#-how-to-contribute)
 - [❓ FAQ](#-faq)
 - [⚖️ License](#-license)
-
 
 
 ## 🚀 Quick Start
@@ -115,29 +122,33 @@ The documentation is automatically generated using **Sphinx**, a documentation g
 
 ## ⚙️ Using groq-qa
 
-### Setup the API Key
+### Setup the API Keys
+First, you need to acquire both a **Groq API key** and a **Hugging Face token**.
 
-First, you need to acquire an API key. Sign up at the [Groq](https://groq.com) website and following their instructions for generating a key.
+- To get the **Groq API key**, sign up at the [Groq](https://groq.com) website and follow their instructions for generating a key.
+- To obtain the **Hugging Face token**, create an account on [Hugging Face](https://huggingface.co/) and generate a token in your account settings.
 
-#### Setting the Environment Variable
-Once you have the key, export it as an environment variable using the following commands based on your operating system:
+#### Setting the Environment Variables
+##### **Option 1**: Using a `.env` File (Recommended)
 
-**MacOS and Linux**
+1. Create a `.env` file in your home directory (`~/`) with the following content:
+   ```bash
+   export GROQ_API_KEY=gsk_example_1234567890abcdef
+   export HF_TOKEN=hf_example_1234567890abcdef
+2. Source the `.env` file to load the environment variables:
 
+   ```bash
+   source ~/.env
+##### **Option 2**: Exporting Directly in the Terminal
+Alternatively, you can export the key and token directly in your terminal.
 ```bash
 export GROQ_API_KEY=gsk_example_1234567890abcdef
-```
-
-**Windows:**
-
-```powershell
-set GROQ_API_KEY=gsk_example_1234567890abcdef
+export HF_TOKEN=hf_example_1234567890abcdef
 ```
 
 ### Command-Line Interface (CLI)
 
-Once installed, the command `groq-qa` becomes available. By default, this command reads from default configuration located at `~/.groq_qa/config.json`. 
-
+Once installed, the command `groq-qa` becomes available. By default, this command reads from the default configuration located at `~/.groq_qa/config.json`. 
 
 Here are a few examples of how to use the `groq-qa` command:
 
@@ -148,16 +159,55 @@ groq-qa
 # Output results in JSON format:
 groq-qa --json 
 
- # Run with model, temperature, questions, and json overrides:
-groq-qa --model llama3-70b-8192 --temperature 0.9 --questions 1 --json
+# Run with model and temperature overrides:
+groq-qa --model llama3-70b-8192 --temperature 0.9
 
+# Run with questions override:
+groq-qa --questions 1
+
+# Run with a custom train/test split of 70% training data and JSON output:
+groq-qa --split 0.7 --json
+
+# Upload generated QA pairs to Hugging Face:
+groq-qa --upload example-username/example-dataset-name
 ```
 
 #### CLI Options:
-* `--model`: The default model to be used for generating QA pairs is defined in `config.json`. The default is set to `llama3-70b-8192`.
-* `--temperature`: Controls the randomness of the model's output. Lower values will result in more deterministic and focused outputs, while higher values will make the output more random. The default is set to `0.1`.
-* `--questions`: Allows you to specify the exact number of question-answer pairs to generate per chunk of text. For example, using `1` will force the system to generate 1 QA pair for each chunk, regardless of chunk size or token limits.
-* `--json`: If this flag is included, the output will be saved in a JSON format. By default, the output is stored as a plain text file. The default is set to `False`.
+* 🧠 `--model`: The default model to be used for generating QA pairs is defined in `config.json`. The default is set to `llama3-70b-8192`.
+* 🔥 `--temperature`: Controls the randomness of the model's output. Lower values will result in more deterministic and focused outputs, while higher values will make the output more random. The default is set to `0.1`.
+* ❓ `--questions`: Allows you to specify the exact number of question-answer pairs to generate per chunk of text. For example, using `1` will force the system to generate 1 QA pair for each chunk, regardless of chunk size or token limits.
+* 🗃️ `--json`: If this flag is included, the output will be saved in a JSON format. By default, the output is stored as a plain text file. The default is set to `False`.
+* 📤 `--upload`: Hugging Face repository path for uploading the QA dataset. For example, `example-username/example-dataset-name`.
+* ✂️ `--split`: Fraction of the dataset to be used for training. For example, `0.8` will allocate **80%** of the data for training and **20%** for testing.
+
+**Note**: You can print out the full list of available CLI options and arguments by using the `--help` option:
+```bash
+groq-qa --help
+```
+
+## 🤗 Hugging Face Datasets
+
+`groq-qa-generator` allows you to export the generated question-answer pairs in JSON format and upload them to [Hugging Face](https://huggingface.co/) as a dataset. This functionality enables you to easily integrate the generated QA pairs into machine learning pipelines, making it ready for fine-tuning models.
+
+
+### Export and Upload:
+1. Generate the QA pairs and export them in JSON format using the `--json` flag:
+    ```bash
+    groq-qa --json
+    ```
+
+2. Use the `--upload` flag to specify the Hugging Face repository where the dataset should be uploaded:
+    ```bash
+    groq-qa --json --upload your-huggingface-username/your-dataset-repo
+    ```
+
+3. Optionally, you can also specify a train/test split ratio using the `--split` argument. The default is to split the data **80%** for training and **20%** for testing:
+    ```bash
+    groq-qa --json --upload your-huggingface-username/your-dataset-repo --split 0.8
+    ```
+
+The dataset will be uploaded to Hugging Face in the `DatasetDict` format, and you can view or further process the dataset in your Hugging Face account.
+
 
 ## 🛠 Configuration
 When you run the `groq-qa` command for the first time, a user-specific configuration directory (`~/.groq_qa/`) is automatically created. This directory contains all the necessary configuration files and templates for customizing input, prompts, and output.
@@ -172,8 +222,10 @@ When you run the `groq-qa` command for the first time, a user-specific configura
 │   └── prompts
 │       ├── sample_question.txt
 │       └── system_prompt.txt
-├── qa_output.json
-└── qa_output.txt
+├── qa_output_training.json
+├── qa_output_test.json
+└── qa_output_training.txt
+└── qa_output_test.txt
 ```
 
 ### Default config.json
@@ -183,6 +235,8 @@ When you run the `groq-qa` command for the first time, a user-specific configura
     "sample_question": "sample_question.txt",
     "input_data": "sample_input_data.txt",
     "output_file": "qa_output.txt",
+    "split_ratio": 0.8,
+    "huggingface_repo": "username/dataset",
     "model": "llama3-70b-8192",
     "chunk_size": 512,
     "tokens_per_question": 60,
@@ -200,6 +254,8 @@ The `~/.groq_qa` directory contains essential files that can be customized to su
   - ❓ **sample_question**: Provide the path to a custom sample question file that helps guide the generation of questions.
   - 📖 **input_data**: Set the path to your own text file from which you want to generate question-answer pairs.
   - 💾 **output_file**: Define the path where the generated QA pairs will be saved.
+  - 📊 **split_ratio**: Specify the ratio of the dataset to be used for training. The default is `0.8` for **80%** training and **20%** testing.
+  - 🤗 **huggingface_repo**: Set the Hugging Face repository repo where the dataset will be uploaded.
 
 Other configurable options include:
 - 🤖 **model**: Select the model to be used for generating QA pairs (e.g., `llama3-70b-8192`).
@@ -249,6 +305,8 @@ def main():
         "sample_question": "custom_sample_question.txt",
         "input_data": "custom_input_data.txt",
         "output_file": "qa_output.txt",
+        "split_ratio": 0.8,
+        "huggingface_repo": "username/dataset",
         "model": "llama3-70b-8192",
         "chunk_size": 512,
         "tokens_per_question": 60,
@@ -256,8 +314,12 @@ def main():
         "max_tokens": 1024
     }
 
-    qa_pairs = groq_qa.generate(custom_config)
-    print(qa_pairs)
+# Generate question-answer pairs
+train_dataset, test_dataset = groq_qa.generate(custom_config)
+
+# Print both train and test datasets
+print(f"Train Dataset: {train_dataset}"
+      f"\n\nTest Dataset: {test_dataset}")
 
 if __name__ == "__main__":
     main()
@@ -267,24 +329,43 @@ This allows you to integrate the functionality within any Python application eas
 
 ## 🧠 Technical Overview
 1. 🔑 **API Interaction**:
-    - **API Key Management**: The API key is securely retrieved from environment variables to ensure safe access to the Groq API.
-    - **Client Initialization**: A Groq API client is initialized to enable communication with the service, providing access to powerful models like **LLaMA 70B**.
+    - **API Keys**: API keys and security tokens are securely retrieved from environment variables to ensure safe access to the Groq and Hugging Face API.
+      - **Groq API**: A Groq client is initialized to enable communication, providing access to powerful models like **LLaMA 70B**.
+      - **Hugging Face API**: Hugging Face Hub is used for uploading the generated QA datasets directly to a repository. This allows for easy integration of datasets into the Hugging Face ecosystem, facilitating model fine-tuning and further dataset management.
+
 
 2. 📄 **Text Processing**:
     - **Loading Prompts and Questions**: The library includes methods to load sample questions and system prompts from specified file paths. These prompts are essential for guiding **LLaMA 70B**'s response.
     - **Generating Full Prompts**: The system prompt and sample question are combined into a complete prompt for the Groq API.
 
 3. 🤖 **QA Pair Generation**:
-    - The core process involves taking a list of text chunks and generating question-answer pairs using the Groq API to prompt **LLaMA 70B** `Groq-qa-generator`:
+    - The core process involves taking a list of text chunks and generating question-answer pairs using the **Groq** API to prompt **LLaMA 70B**.
         - Loads the system prompt and sample question.
         - Iterates through each text chunk, creating a full prompt for **LLaMA 70B**.
-        - Retrieves the completion from the Groq API, and in turn the model.
+        - Retrieves the completion from the **Groq** API, and in turn the model.
         - Streams the completion response and converts it into question-answer pairs.
-        - Writes the generated QA pairs to the output file.
+        - Splits the QA pairs into separate train and test files based on the split ratio (default is 80% train, 20% test).
+        - Converts the generated QA pairs into a **Hugging Face** dataset and optionally uploads to a repository.
 
-## 🧪 Running Tests
 
-To run the project's tests, you can use Poetry and pytest. Follow these steps:
+## 🧪 Testing Overview
+
+**groq-qa-generator** includes comprehensive tests that ensure its core functionalities are reliable and efficient:
+
+- **API Interactions**: Tests like `test_groq_api.py` mock API calls (e.g., `get_groq_client()`) to verify that external APIs such as **Groq** and **Hugging Face** function correctly. This ensures robust behavior even in different environments.
+  
+- **Configuration Handling**: Tests in `test_config.py` check proper loading of user-defined and default settings, ensuring flexibility and consistency across deployments.
+
+- **Tokenization & Data Processing**: `test_tokenizer.py` and `test_dataset_processor.py` verify accurate text tokenization and the conversion of QA pairs into usable datasets. This is crucial for generating high-quality outputs.
+
+- **QA Generation**: Core tests in `test_qa_generation.py` ensure reliable generation of question-answer pairs, which is the main functionality of the library.
+
+- **Logging**: `test_logging_setup.py` ensures proper logging configuration, aiding in debugging and performance tracking.
+
+
+### 🥼 Running Tests
+
+To run the project's tests, you can use [Poetry](https://python-poetry.org/) and `pytest`. Follow these steps:
 
 1. 📦 **Install Poetry**: If you haven't already, install Poetry using pip.
    ```bash
@@ -295,7 +376,7 @@ To run the project's tests, you can use Poetry and pytest. Follow these steps:
    cd groq-qa-generator
    poetry install
    ```
-3.  ⚙️ **Confirm the Environment**: Verify that the virtual environment has been correctly set up and activated.
+3. ⚙️ **Confirm the Environment**: Verify that the virtual environment has been correctly set up and activated.
    ```bash
    poetry shell
    ```
@@ -303,13 +384,6 @@ To run the project's tests, you can use Poetry and pytest. Follow these steps:
    ```bash
    poetry run pytest
    ```
-
-The tests cover various components, including:
-
-- API interaction
-- Configuration loading
-- Tokenization
-- QA generation
 
 
 ## 🤝 How to Contribute
@@ -336,6 +410,15 @@ The tests cover various components, including:
 6. 📦 **List Installed Packages**: Ensure that the dependencies have been installed correctly by listing the installed packages.
    ```bash
    poetry show
+7. 📝 **Pick an Existing Issue or Suggest a New One**:
+   - Check out the [issues page](https://github.com/jcassady/groq-qa-generator/issues) to see if there's an open issue you’d like to work on. If you find one, just drop a comment to let everyone know you're taking it on.
+   - If you don’t see anything related to what you're working on, feel free to [create a new issue](https://github.com/jcassady/groq-qa-generator/issues/new) to describe the bug, feature, or improvement you have in mind.
+
+8. 🔄 **Commit and Push**: After making your changes, commit them with a clear message and push your branch to your forked repository.
+   ```bash
+   git add .
+   git commit -m "Add a concise description of your changes"
+   git push origin feature/your-feature-name
    ```
 
 ## ❓ FAQ
@@ -364,15 +447,23 @@ You can override the default configuration settings in two ways:
 2. Pass command-line arguments to override specific settings, for example:
 
 ```bash
-groq-qa --model llama3-70b-8192 --temperature 0.9
+groq-qa --model llama3-70b-8192 --temperature 0.9 --json
 ```
 
 ### 🎛 How can I increase the randomness of the output?
 Increase the `temperature` value in the configuration or pass it as a command-line argument (e.g., `--temperature 0.9`).
 
+### 🔍 How do I upload my QA pairs to Hugging Face?
+The tool allows you to upload QA pairs directly to Hugging Face. You can configure the Hugging Face repository in the `config.json` file under the `huggingface_repo` field or pass it as a command-line argument using the `--upload` option.
+
+### 🔢 How can I split the dataset into training and test sets?
+You can split your QA pairs dataset using the **Hugging Face** integration by specifying a split ratio in the configuration file or passing it via the command line with the `--split` argument. For example, to split **80%** of the data for training and **20%** for testing, use `--split 0.8`.
 
 ### 🐍 Can I use this tool in a larger Python project?
 Yes, `groq_qa_generator` can be used as a Python library within your project. Simply import the module and configure it to generate QA pairs programmatically.
+
+### 🌱 How can I contribute to the project?
+If you'd like to contribute, feel free to browse the [issues page](https://github.com/jcassady/groq-qa-generator/issues) to find something to work on or propose a new issue. Fork the repository, create a new branch, and submit a pull request once your changes are ready!
 
 ## ⚖️ License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

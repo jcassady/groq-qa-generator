@@ -11,9 +11,13 @@ from groq_qa_generator.groq_api import (
 
 def test_get_groq_client():
     """
-    Test get_groq_client function to ensure it returns a valid client instance.
+    Test the `get_groq_client` function to ensure it returns a valid Groq client instance.
 
-    This test checks if the Groq client is properly initialized using the given API key.
+    This test verifies that the Groq client is properly initialized when provided with a valid API key.
+    It ensures that the client object returned is not None and can be used for making API calls.
+    
+    Asserts:
+        - The client object returned is not None.
     """
     api_key = "gsk_test_1234567890abcdef"
     client = get_groq_client(api_key)
@@ -23,10 +27,18 @@ def test_get_groq_client():
 @patch("groq_qa_generator.groq_api.Groq")
 def test_get_groq_completion(mock_groq):
     """
-    Test get_groq_completion function with a valid client and inputs.
+    Test the `get_groq_completion` function to ensure it generates valid completions using the Groq API.
 
-    This test checks if the completion function correctly calls the Groq API client
-    and returns the expected completion result using the provided system prompt and chunk text.
+    This test mocks the Groq API client and verifies that the `get_groq_completion` function correctly 
+    calls the API with the provided system prompt, chunk of text, model, temperature, and token limit.
+    It checks that the function returns the expected completion result.
+
+    Args:
+        mock_groq (MagicMock): Mock of the Groq API client.
+
+    Asserts:
+        - The completion result matches the expected mock value ("test_completion").
+        - The API client is called once with the correct parameters.
     """
     mock_client = MagicMock()
     mock_groq.return_value = mock_client
@@ -58,10 +70,16 @@ def test_get_groq_completion(mock_groq):
 @patch("groq_qa_generator.groq_api.Groq")
 def test_get_groq_completion_error(mock_groq):
     """
-    Test get_groq_completion function when an error occurs during the API call.
+    Test the `get_groq_completion` function to handle API errors gracefully.
 
-    This test simulates an exception being raised by the API client, ensuring
-    that the function handles the error gracefully by logging it and returning None.
+    This test simulates an error raised during the API call and ensures that the function catches
+    the exception, logs the error, and returns `None` instead of raising the exception.
+
+    Args:
+        mock_groq (MagicMock): Mock of the Groq API client that simulates an error.
+
+    Asserts:
+        - The function returns `None` when an exception is raised.
     """
     mock_client = MagicMock()
     mock_groq.return_value = mock_client
@@ -77,10 +95,14 @@ def test_get_groq_completion_error(mock_groq):
 
 def test_stream_completion():
     """
-    Test stream_completion function to ensure the streaming response is properly accumulated.
+    Test the `stream_completion` function to ensure it accumulates the streamed response correctly.
 
-    This test checks if the function correctly accumulates the content from the streamed
-    Groq API response and returns the full generated text.
+    This test verifies that the `stream_completion` function correctly processes and combines 
+    the incremental content chunks streamed from the Groq API. It checks that the full generated 
+    text is accumulated and returned as a single string.
+
+    Asserts:
+        - The function correctly concatenates and returns the complete response from the stream.
     """
     mock_completion = [
         MagicMock(

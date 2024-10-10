@@ -21,26 +21,41 @@ ALICE_TEXT = (
 
 
 def test_count_tokens():
-    """Test the count_tokens function to ensure it accurately counts tokens in given text.
+    """
+    Test the `count_tokens` function to ensure it correctly counts the number of tokens in the given text.
 
-    This test checks the following cases:
-    - A simple string input ("Hello, world!") to verify the function can count tokens in basic text.
-    - A longer text from "Alice's Adventures in Wonderland" to verify the function handles larger text inputs.
+    The test covers two cases:
+    1. A simple text ("Hello, world!") to verify that the function can handle short, straightforward inputs.
+    2. A longer excerpt from "Alice's Adventures in Wonderland" to check if the function can accurately
+       count tokens in larger, more complex inputs.
+
+    We use `pytest.mark.parametrize` to run multiple test cases with expected token counts.
+
+    Token counting is based on the function's internal tokenization mechanism, which may differ slightly
+    from common word counting, particularly when handling punctuation, contractions, and whitespace.
     """
 
     # Test cases with expected token counts
     @pytest.mark.parametrize(
         "text, expected",
         [
-            ("Hello, world!", 4),  # Example with simple text
+            ("Hello, world!", 4),  # A simple example to verify basic token counting
             (
                 ALICE_TEXT,
-                139,
-            ),  # Adjust based on actual tokenization of the longer excerpt
+                139,  # The token count expected for the longer Alice excerpt (adjust based on tokenizer)
+            ),
         ],
     )
     def test_count_tokens(text, expected):
-        """Check that the count_tokens function returns the expected number of tokens for various inputs."""
+        """
+        Assert that the `count_tokens` function returns the correct number of tokens
+        for various types of input texts, ranging from simple to complex.
+        
+        Args:
+            text (str): The input text for which token count is being checked.
+            expected (int): The expected number of tokens for the given text.
+
+        Returns:
+            None
+        """
         assert count_tokens(text) == expected
-
-

@@ -1,4 +1,5 @@
 import os
+import re
 import argparse
 import json
 import shutil
@@ -41,6 +42,39 @@ def parse_arguments():
             if not (0.0 <= temperature <= 1.0):
                 raise ValueError("Temperature must be between 0.0 and 1.0.")
 
+        def validate_split_ratio(split_ratio):
+            if not 0.0 < args.split < 1.0:
+                raise ValueError("--split must be a float between 0.0 and 1.0")
+
+        def validate_huggingface_repo(repo_path):
+            """
+            Validate the Hugging Face repository path. It should be in the format:
+            username/dataset.
+
+            Args:
+                repo_path (str or None): The repository path to validate. If None, validation is skipped.
+
+            Raises:
+                ValueError: If the repo path is invalid.
+            """
+            if repo_path is None:
+                return
+
+            # Hugging Face repo path must be in the form 'username/dataset-name'
+            pattern = r"^[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+$"
+
+            if repo_path == "username/dataset":
+                raise ValueError(
+                    "Invalid Hugging Face Hub repo path: 'username/dataset' is a placeholder. "
+                    "Please provide a valid repository user and dataset name."
+                )
+
+            if not re.match(pattern, repo_path):
+                raise ValueError(
+                    f"Invalid Hugging Face repo path: {repo_path}. It should be in the format "
+                    "'username/dataset'."
+                )
+
         # Create the argument parser
         parser = argparse.ArgumentParser(
             description="Generate QA pairs from text input."
@@ -70,6 +104,8 @@ def parse_arguments():
             help="Set the temperature for the model's output generation. Must be between 0.0 and 1.0.",
         )
 
+        # Add argument for questions setting
+        # Add argument for questions setting
         parser.add_argument(
             "--questions",
             type=int,
@@ -77,12 +113,41 @@ def parse_arguments():
             help="Number of QA pairs per text chunk to generate.",
         )
 
+        # Add argument for split setting
+        parser.add_argument(
+            "--split",
+            type=float,
+            default=0.8,
+            help=(
+                "Fraction of the dataset to be used for training. "
+                "The value should be between 0.0 and 1.0, representing the proportion of data allocated to training. "
+                "For example, --split 0.8 will allocate 80% of the data for training and 20% for testing."
+            ),
+        )
+
+        # Add argument for upload setting
+        parser.add_argument(
+            "--upload",
+            type=str,
+            default=None,
+            help=(
+                "Hugging Face repository path for uploading the QA dataset. "
+                "For example, example-username/example-dataset-name"
+            ),
+        )
+
         # Parse the arguments
         args = parser.parse_args()
 
-        # Validate the temperature argument
+        # Validate the provided temperature, split ratio,
+        # and Hugging Face repository arguments
+        # Validate the provided temperature, split ratio,
+        # and Hugging Face repository arguments
         validate_temperature(args.temperature)
+        validate_split_ratio(args.split)
+        validate_huggingface_repo(args.upload)
 
+        # Return the args post-validation
         return args
 
     except argparse.ArgumentError as e:
@@ -189,10 +254,25 @@ def load_config(args, config_file="config.json"):
         """
         # Set model and temperature if provided, otherwise keep existing config
         config["model"] = args.model or config.get("model", "default_model")
-        config["temperature"] = args.temperature if args.temperature is not None else config.get("temperature", 0.1)
+        config["temperature"] = (
+            args.temperature
+            if args.temperature is not None
+            else config.get("temperature", 0.1)
+        )
+        config["temperature"] = (
+            args.temperature
+            if args.temperature is not None
+            else config.get("temperature", 0.1)
+        )
 
         # Set questions with a default value of None if not provided
         config["questions"] = args.questions or None
+
+        # Override the Hugging Face repo path if the --upload option is provided
+        config["huggingface_repo"] = args.upload or None
+
+        # Override the split ratio if the --split option is provided
+        config["split_ratio"] = args.split or None
 
         # Set JSON output handling, modifying the output file if JSON is selected
         if args.json:
@@ -200,19 +280,14 @@ def load_config(args, config_file="config.json"):
             config["output_file"] = f"{base_output_file}.json"
         config["json"] = args.json or False
 
-
-    try:
-        config = load_json_config(config_file)
-        config = resolve_config_paths(config)
-        override_config_with_cli_args(args, config)
-        log_config(config, os.path.join(get_user_config_dir(), config_file))
         return config
-    except FileNotFoundError as e:
-        logging.error(f"Configuration file error: {e}")
-        raise SystemExit(f"Error: {e}")
-    except ValueError as e:
-        logging.error(f"Configuration parsing error: {e}")
-        raise SystemExit(f"Error: {e}")
+
+    config = load_json_config(config_file)
+    config = resolve_config_paths(config)
+    config = override_config_with_cli_args(args, config)
+    log_config(config, os.path.join(get_user_config_dir(), config_file))
+
+    return config
 
 
 def log_config(config, config_file_path):
