@@ -1,9 +1,11 @@
 from .logging_setup import initialize_logging
 from .tokenizer import generate_text_chunks
 from .qa_generation import generate_qa_pairs
+from .dataset_processor import create_dataset_from_qa_pairs
+from groq_qa_generator.huggingface_api import upload
 
 
-def generate(custom_config=None):
+def generate(config=None):
     """Generate question-answer pairs using user-defined configuration.
 
     This function allows developers to utilize the pip-installed package by providing their own custom configuration.
@@ -11,7 +13,7 @@ def generate(custom_config=None):
     based on those chunks.
 
     Args:
-        custom_config (dict, optional): A dictionary containing user-defined configuration options. The expected
+        config (dict, optional): A dictionary containing user-defined configuration options. The expected
         configuration keys and their descriptions are as follows:
 
         - system_prompt (str): Path to the system prompt file.
@@ -38,45 +40,64 @@ def generate(custom_config=None):
             "chunk_size": 512,
             "tokens_per_question": 60,
             "temperature": 0.1,
-            "max_tokens": 1500
+            "max_tokens": 1500,
+            "split_ratio": 0.7,
+            "huggingface_repo": "username/custom-dataset"
         }
-
-        # Generate question-answer pairs
-        qa_pairs = groq_qa.generate(custom_config)
-
-        # Print generated QA pairs
-        for pair in qa_pairs:
-            print(pair)
         ```
-
     Returns:
-        list of dict: A list of dictionaries containing generated question-answer pairs.
+        dict: A dictionary containing the train and test datasets as separate lists of question-answer pairs.
+        Example:
+        {
+            "train": [train_qa_pairs],
+            "test": [test_qa_pairs]
+        }
     """
     initialize_logging()
 
-    # If custom_config is provided, use it; otherwise, raise an error
-    if custom_config is None:
-        raise ValueError("custom_config must be provided for generating QA pairs.")
+    # If config is provided, use it; otherwise, raise an error
+    if config is None:
+        raise ValueError("config must be provided for generating QA pairs.")
 
-    # Create a default groq_config based on the custom_config
-    groq_config = {
-        "system_prompt": custom_config.get("system_prompt"),
-        "sample_question": custom_config.get("sample_question"),
-        "input_data": custom_config.get("input_data"),
-        "output_file": custom_config.get("output_file"),
-        "model": custom_config.get("model"),
-        "chunk_size": custom_config.get("chunk_size", 512),
-        "tokens_per_question": custom_config.get("tokens_per_question", 60),
-        "temperature": custom_config.get("temperature", 0.7),
-        "max_tokens": custom_config.get("max_tokens", 1024),
+    # Create a config dictionary
+    config = {
+        "system_prompt": config.get("system_prompt"),
+        "sample_question": config.get("sample_question"),
+        "input_data": config.get("input_data"),
+        "output_file": config.get("output_file"),
+        "split_ratio": 0.8,
+        "huggingface_repo": "username/dataset",
+        "model": config.get("model"),
+        "chunk_size": config.get("chunk_size", 512),
+        "tokens_per_question": config.get("tokens_per_question", 60),
+        "temperature": config.get("temperature", 0.7),
+        "max_tokens": config.get("max_tokens", 1024),
     }
 
     # Read input data and chunk the text
     text_chunks = generate_text_chunks(
-        groq_config["input_data"], chunk_size=groq_config.get("chunk_size", 512)
+        config["input_data"], chunk_size=config.get("chunk_size", 512)
     )
 
     # Generate QA pairs based on the input text and configuration
-    qa_pairs = generate_qa_pairs(text_chunks, groq_config)
+    qa_pairs = generate_qa_pairs(text_chunks, config)
 
-    return qa_pairs
+    # Retrieve the split ratio from the config
+    if "split_ratio" in config:
+        split_ratio = config["split_ratio"]
+
+    # Process the qa_pairs and split them into training and test datasets in Hugging Face format
+    train_dataset, test_dataset = create_dataset_from_qa_pairs(qa_pairs, split_ratio)
+
+    # Upload the QA pairs to Hugging Face using the repository slug from the config
+    if "huggingface_repo" in config:
+        upload(train_dataset, test_dataset, config["huggingface_repo"])
+
+    # Return the QA pairs split into training and test datasets
+    return {"train": train_dataset, "test": test_dataset}
+
+
+if __name__ == "__main__":
+    raise RuntimeError(
+        "Do not run groq_qa.py directly. Please use cli.py for testing and development purposes."
+    )
