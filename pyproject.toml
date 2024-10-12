@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "groq-qa-generator"
-version = "1.2.0"
+version = "1.2.1"
 description = "Groq QA automates question-answer generation from text with LLaMA 3 and Hugging Face to fine-tune large language models (LLMs)."
 authors = ["Jordan Cassady <jordan.cassady@gmail.com>"]
 readme = "README.md"
