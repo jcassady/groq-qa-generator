@@ -21,9 +21,10 @@
 </p>
 
 
-|  <p align="left">**Groq QA** is a Python library that automates creating question-answer pairs from text to fine-tune large language models (LLMs). Powered by **[Groq](https://groq.com/)** and extended with **[Hugging Face](https://huggingface.co/)**, it uses models like **[LLaMA 3](https://www.llama.com/)** (70B parameters, 128K tokens) to generate high-quality QA pairs. The tool streamlines dataset preparation and enables easy fine-tuning in research, education, and domain-specific applications.</p> |
+|  <p align="left">**Groq QA** is a Python library that automates creating question-answer pairs from text to fine-tune large language models (LLMs). Powered by **[Groq](https://groq.com/)** and extended with **[Hugging Face](https://huggingface.co/)**, it uses models like **[LLaMA 3](https://www.llama.com/)** (70B parameters, 128K tokens) to generate high-quality QA pairs. The tool streamlines dataset preparation, offering custom train/test split ratios, and enables straightforward fine-tuning in research, education, and domain-specific applications.</p> |
 |---------------------------------------------------------------------------------------------------------------|
 | <p align="center">**Note**: ***This project is not affiliated with or endorsed by Groq, Inc.***</p> |
+
 
 
 
