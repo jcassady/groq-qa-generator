@@ -12,7 +12,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/jcassady/groq-qa-generator?logo=github&label=Repo%20size)
 ![Python versions](https://img.shields.io/pypi/pyversions/groq-qa-generator)
 [![Downloads](https://static.pepy.tech/badge/groq-qa-generator)](https://pepy.tech/project/groq-qa-generator)
-![Visitors](https://img.shields.io/badge/Visits-11663-blue)
 
 <p align="center">
   <img src="./assets/images/logo.png" alt="Groqqy" /><br>
